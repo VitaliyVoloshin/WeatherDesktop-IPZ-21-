@@ -48,7 +48,7 @@ namespace WeatherDesktop__IPZ_21__
         public void Warning()
         {
             MessageBox.Show("Cache file is empty or not found","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            Status.Text = String.Empty;
+            Status.Text = "Updated " + DateTime.Now.ToString("HH:mm:ss");
             labelWeatherData.Text = string.Empty;
             pictureBox3.Image = null;
         }
