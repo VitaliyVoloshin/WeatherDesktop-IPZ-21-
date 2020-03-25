@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Resources;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -132,7 +129,7 @@ namespace WeatherDesktop__IPZ_21__
         /// <summary>
         /// output latest successful info from some service from the project's directory
         /// </summary>
-        public void Output_Cache(string cache_name)
+        public void Output_Cache(MainForm mainform,string cache_name)
         {
             string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             string[] files = Directory.GetFiles(path, cache_name, SearchOption.AllDirectories);
@@ -140,11 +137,16 @@ namespace WeatherDesktop__IPZ_21__
             {
                 string file_path = String.Join("", files);
                 string json = File.ReadAllText(file_path);
-                Output(json);
+                if (json == String.Empty)
+                {
+                    mainform.Warning();
+                    return;
+                }
+                Output(json,mainform);
             }
             else
             {
-                Console.WriteLine("No cache file yet!!!");
+                mainform.Warning();
             }
         }
 
@@ -154,21 +156,27 @@ namespace WeatherDesktop__IPZ_21__
         public void Output(List<Values> inf_list, MainForm mainform)
         {
             var sb = new StringBuilder();
+            string status = String.Empty;
             for (int i = 1; i <= inf_list.Count() - 1; i++)
             {
                 sb.Append(inf_list[i].Desc + ":  " + inf_list[i].Value + "\n");
+                if (inf_list[i].Desc == "time")
+                    status = inf_list[i].Value;
             }
-            mainform.ChangeWeatherData(sb.ToString(), "Updated "+DateTime.Now.ToString("HH:mm:ss"));
+            mainform.ChangeWeatherData(sb.ToString(), "Updated " + DateTime.Now.ToString("HH:mm:ss"));
+            mainform.WeatherIcon("_"+inf_list[0].Value);
         }
 
         /// <summary>
         /// output information on the screen from cache.This method is invoked from Output_Cache_OW
         /// </summary>
-        public void Output(string json)
+        public void Output(string json,MainForm mainform)
         {
             string json_local = JToken.Parse(json).Children<JProperty>().
                 FirstOrDefault(x => x.Name == "saved_info").Value.ToString();
             string image_icon = String.Empty;
+            var sb = new StringBuilder();
+            string status = String.Empty;
 
             JArray array = JArray.Parse(json_local);
             foreach (JObject content in array.Children<JObject>())
@@ -176,11 +184,19 @@ namespace WeatherDesktop__IPZ_21__
                 foreach (JProperty prop in content.Properties())
                 {
                     if (prop.Name == "image_icon")
+                    {
                         image_icon = prop.Value.ToString();
+                        mainform.WeatherIcon("_" + image_icon);
+                    }
                     else
-                        Console.WriteLine(prop.Value);
+                    {
+                        sb.Append(prop.Name + ": " + prop.Value + "\n");
+                        if (prop.Name == "time")
+                            status = prop.Value.ToString();
+                    }
                 }
             }
+            mainform.ChangeWeatherData(sb.ToString(), "Updated " + DateTime.Now.ToString("HH:mm:ss"));
         }
     }
 
@@ -207,13 +223,13 @@ namespace WeatherDesktop__IPZ_21__
         // all main methods invokes here
         public AccuWeather(MainForm mainform)
         {
-            this.ip_address = new Methods().GetIP();
-            new Methods().GetPosition(this.ip_address, ref this.latitude, ref this.longtitude);
-            this.location_id = GetLocation_id();
-            Weather();
-            new Methods().Output(Info, mainform);
+            /* this.ip_address = new Methods().GetIP();
+             new Methods().GetPosition(this.ip_address, ref this.latitude, ref this.longtitude);
+             this.location_id = GetLocation_id();
+             Weather();*/
             this.mainform = mainform;
-            //new Methods().Output_Cache(cache_name);
+           // new Methods().Output(Info, mainform);
+            new Methods().Output_Cache(mainform,cache_name);
         }
 
         /// <summary>
@@ -279,12 +295,12 @@ namespace WeatherDesktop__IPZ_21__
         // all main methods invokes here
         public OpenWeather(MainForm mainform)
         {
-            this.ip_address = new Methods().GetIP();
+            /*this.ip_address = new Methods().GetIP();
             new Methods().GetPosition(ip_address, ref this.latitude, ref this.longtitude);
-            Weather();
-            new Methods().Output(Info, mainform);
+            Weather();*/
             this.mainform = mainform;
-            //new Methods().Output_Cache(cache_name);
+            //new Methods().Output(Info, mainform);
+            new Methods().Output_Cache(mainform, cache_name);
         }
 
         /// <summary>
@@ -324,22 +340,4 @@ namespace WeatherDesktop__IPZ_21__
         }
 
     }
-
-
-    /*
-    class ProgramY
-    {
-        // entry point of the program
-        static void Main(string[] args)
-        {
-            if (Console.ReadLine() == "1")
-                new AccuWeather();
-            else
-                new OpenWeather();
-            Console.ReadKey();
-        }
-    }
-    */
-
-
 }

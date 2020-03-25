@@ -62,17 +62,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -87,6 +88,66 @@
     <Content Include="Images\cloudy-weather-3078 %281%29.ico" />
     <Content Include="Images\error %281%29.png" />
     <Content Include="Images\minimize-window-32 %281%29.ico" />
+    <None Include="Resources\44.png" />
+    <None Include="Resources\43.png" />
+    <None Include="Resources\42.png" />
+    <None Include="Resources\41.png" />
+    <None Include="Resources\40.png" />
+    <None Include="Resources\39.png" />
+    <None Include="Resources\38.png" />
+    <None Include="Resources\37.png" />
+    <None Include="Resources\36.png" />
+    <None Include="Resources\35.png" />
+    <None Include="Resources\34.png" />
+    <None Include="Resources\33.png" />
+    <None Include="Resources\32.png" />
+    <None Include="Resources\31.png" />
+    <None Include="Resources\30.png" />
+    <None Include="Resources\29.png" />
+    <None Include="Resources\26.png" />
+    <None Include="Resources\25.png" />
+    <None Include="Resources\24.png" />
+    <None Include="Resources\23.png" />
+    <None Include="Resources\22.png" />
+    <None Include="Resources\21.png" />
+    <None Include="Resources\20.png" />
+    <None Include="Resources\19.png" />
+    <None Include="Resources\18.png" />
+    <None Include="Resources\17.png" />
+    <None Include="Resources\16.png" />
+    <None Include="Resources\15.png" />
+    <None Include="Resources\14.png" />
+    <None Include="Resources\13.png" />
+    <None Include="Resources\12.png" />
+    <None Include="Resources\11.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\7.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\5.png" />
+    <None Include="Resources\4.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\2.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\50n.png" />
+    <None Include="Resources\50d.png" />
+    <None Include="Resources\13n.png" />
+    <None Include="Resources\13d.png" />
+    <None Include="Resources\11n.png" />
+    <None Include="Resources\11d.png" />
+    <None Include="Resources\10n.png" />
+    <None Include="Resources\10d.png" />
+    <None Include="Resources\09n.png" />
+    <None Include="Resources\09d.png" />
+    <None Include="Resources\04n.png" />
+    <None Include="Resources\04d.png" />
+    <None Include="Resources\03n.png" />
+    <None Include="Resources\03d.png" />
+    <None Include="Resources\02n.png" />
+    <None Include="Resources\02d.png" />
+    <None Include="Resources\01n.png" />
+    <None Include="Resources\01d.png" />
+    <None Include="Resources\logo_AW.png" />
+    <None Include="Resources\logo_OW.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
