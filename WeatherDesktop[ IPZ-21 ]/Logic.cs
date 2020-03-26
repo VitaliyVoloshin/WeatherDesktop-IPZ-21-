@@ -129,7 +129,7 @@ namespace WeatherDesktop__IPZ_21__
         /// <summary>
         /// output latest successful info from some service from the project's directory
         /// </summary>
-        public void Output_Cache(MainForm mainform,string cache_name)
+        public void Output_Cache(MainForm mainform, string cache_name, string option="Warning")
         {
             string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             string[] files = Directory.GetFiles(path, cache_name, SearchOption.AllDirectories);
@@ -146,7 +146,8 @@ namespace WeatherDesktop__IPZ_21__
             }
             else
             {
-                mainform.Warning();
+                if (option == "Warning") { mainform.Warning(); }
+                else { throw new Exception(); }
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
 
 using WeatherDesktop__IPZ_21__.Properties;
@@ -23,19 +24,66 @@ namespace WeatherDesktop__IPZ_21__
 
         public void InfoUpdate() {
             if (comboBox1.SelectedIndex == 0) {
-                new AccuWeather(this);
-                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                pictureBox1.Image = Resources.logo_AW;
+                if (CheckForInternetConnection() == false)
+                {
+                    bool got_info = true;
+
+                    try { new Methods().Output_Cache(this, "cache_accu.json"); }
+                    catch
+                    {
+                        got_info = false;
+                    }
+                    string UpdateStatus = (got_info == true) ? "Updated from cache" : "No cache found";
+                    ChangeWeatherData(UpdateStatus);
+                }
+                else { 
+                    new AccuWeather(this);
+                    pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+                    pictureBox1.Image = Resources.logo_AW;
+                }      
             }
             else if (comboBox1.SelectedIndex == 1) {
-                new OpenWeather(this);
-                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-                pictureBox1.Image = Resources.logo_OW;
+                if (CheckForInternetConnection() == false)
+                {
+                    bool got_info = true;
+
+                    try { new Methods().Output_Cache(this, "cache_ow.json"); }
+                    catch
+                    {
+                        got_info = false;
+                    }
+                    string UpdateStatus = (got_info == true) ? "Updated from cache" : "No cache found";
+                    ChangeWeatherData(UpdateStatus);
+                }
+                else { 
+                    new OpenWeather(this);
+                    pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+                    pictureBox1.Image = Resources.logo_OW;
+                }   
+            }
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
         public void ChangeWeatherData(string weather, string status) {
             labelWeatherData.Text = weather;
+            Status.Text = status;
+        }
+
+        public void ChangeWeatherData(string status)
+        {
             Status.Text = status;
         }
 
