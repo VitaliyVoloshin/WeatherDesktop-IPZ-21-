@@ -28,7 +28,7 @@ namespace WeatherDesktop__IPZ_21__
                 {
                     bool got_info = true;
 
-                    try { new Methods().Output_Cache(this, "cache_accu.json"); }
+                    try { new Methods().Output_Cache(this, new AccuWeather().cache_name); }
                     catch
                     {
                         got_info = false;
@@ -47,7 +47,7 @@ namespace WeatherDesktop__IPZ_21__
                 {
                     bool got_info = true;
 
-                    try { new Methods().Output_Cache(this, "cache_ow.json"); }
+                    try { new Methods().Output_Cache(this, new OpenWeather().cache_name); }
                     catch
                     {
                         got_info = false;

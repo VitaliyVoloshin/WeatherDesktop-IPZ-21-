@@ -205,7 +205,7 @@ namespace WeatherDesktop__IPZ_21__
     {
 
         private string location_id;
-        private string cache_name = "cache_accu.json";
+        public string cache_name = "cache_accu.json";
 
         // services
         #region
@@ -221,16 +221,17 @@ namespace WeatherDesktop__IPZ_21__
         private readonly List<Values> Info = new List<Values>();
         #endregion
 
+        public AccuWeather()
+        { }
         // all main methods invokes here
         public AccuWeather(MainForm mainform)
         {
-            /* this.ip_address = new Methods().GetIP();
+             this.ip_address = new Methods().GetIP();
              new Methods().GetPosition(this.ip_address, ref this.latitude, ref this.longtitude);
              this.location_id = GetLocation_id();
-             Weather();*/
+             Weather();
             this.mainform = mainform;
-           // new Methods().Output(Info, mainform);
-            new Methods().Output_Cache(mainform,cache_name);
+            new Methods().Output(Info, mainform);
         }
 
         /// <summary>
@@ -285,7 +286,7 @@ namespace WeatherDesktop__IPZ_21__
     class OpenWeather : Variables
     {
         private string pattern_url = @"https://api.openweathermap.org//data//2.5//weather?lat={0}&lon={1}&APPID={2}";
-        private string cache_name = "cache_ow.json";
+        public string cache_name = "cache_ow.json";
 
         //  readonly variables
         #region
@@ -293,15 +294,16 @@ namespace WeatherDesktop__IPZ_21__
         private readonly List<Values> Info = new List<Values>();
         #endregion
 
+        public OpenWeather()
+        { }
         // all main methods invokes here
         public OpenWeather(MainForm mainform)
         {
-            /*this.ip_address = new Methods().GetIP();
+            this.ip_address = new Methods().GetIP();
             new Methods().GetPosition(ip_address, ref this.latitude, ref this.longtitude);
-            Weather();*/
+            Weather();
             this.mainform = mainform;
-            //new Methods().Output(Info, mainform);
-            new Methods().Output_Cache(mainform, cache_name);
+            new Methods().Output(Info, mainform);
         }
 
         /// <summary>
