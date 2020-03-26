@@ -28,7 +28,7 @@ namespace WeatherDesktop__IPZ_21__
                 {
                     bool got_info = true;
 
-                    try { new Methods().Output_Cache(this, new AccuWeather().cache_name); }
+                    try { new Methods().Output_Cache(this, new AccuWeather().cache_name); pictureBox1.Image = Resources.logo_AW; }
                     catch
                     {
                         got_info = false;
@@ -47,7 +47,7 @@ namespace WeatherDesktop__IPZ_21__
                 {
                     bool got_info = true;
 
-                    try { new Methods().Output_Cache(this, new OpenWeather().cache_name); }
+                    try { new Methods().Output_Cache(this, new OpenWeather().cache_name); pictureBox1.Image = Resources.logo_OW; }
                     catch
                     {
                         got_info = false;
