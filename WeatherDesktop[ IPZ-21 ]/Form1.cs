@@ -28,7 +28,11 @@ namespace WeatherDesktop__IPZ_21__
                 {
                     bool got_info = true;
 
-                    try { new Methods().Output_Cache(this, new AccuWeather().cache_name); pictureBox1.Image = Resources.logo_AW; }
+                    try {
+                        API api;
+                        api = new AccuWeather(new ImplementAccu(), this);
+                        api.Output_Cache();
+                        pictureBox1.Image = Resources.logo_AW; }
                     catch
                     {
                         got_info = false;
@@ -36,8 +40,12 @@ namespace WeatherDesktop__IPZ_21__
                     string UpdateStatus = (got_info == true) ? "Updated from cache" : "No cache found";
                     ChangeWeatherData(UpdateStatus);
                 }
-                else { 
-                    new AccuWeather(this);
+                else {
+                    API api;
+                    api = new AccuWeather(new ImplementAccu(),this);
+                    api.Device_info();
+                    api.Weather_Save();
+                    api.BaseOutput();
                     pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
                     pictureBox1.Image = Resources.logo_AW;
                 }      
@@ -47,7 +55,11 @@ namespace WeatherDesktop__IPZ_21__
                 {
                     bool got_info = true;
 
-                    try { new Methods().Output_Cache(this, new OpenWeather().cache_name); pictureBox1.Image = Resources.logo_OW; }
+                    try {
+                        API api;
+                        api = new OpenWeather(new ImplementOpenW(),this);
+                        api.Output_Cache();
+                        pictureBox1.Image = Resources.logo_OW; }
                     catch
                     {
                         got_info = false;
@@ -55,8 +67,12 @@ namespace WeatherDesktop__IPZ_21__
                     string UpdateStatus = (got_info == true) ? "Updated from cache" : "No cache found";
                     ChangeWeatherData(UpdateStatus);
                 }
-                else { 
-                    new OpenWeather(this);
+                else {
+                    API api;
+                    api = new OpenWeather(new ImplementOpenW(),this);
+                    api.Device_info();
+                    api.Weather_Save();
+                    api.BaseOutput();
                     pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
                     pictureBox1.Image = Resources.logo_OW;
                 }   
